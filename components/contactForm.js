@@ -1,4 +1,5 @@
 const BasePage = require('../pages/BasePage');
+const { expect } = require('@playwright/test');
 
 class ContactForm extends BasePage {
     /**
@@ -8,15 +9,16 @@ class ContactForm extends BasePage {
         super(page);
         this.formPopover = this.page.locator('#contact-us-popover');
         this.closeButton = this.formPopover.locator('button.close-button');
-        
+
         // Input fields
-        this.firstNameInput = this.page.getByLabel('Nome', { exact: true });
-        this.lastNameInput = this.page.getByLabel('Sobrenome');
-        this.businessEmailInput = this.page.getByLabel('Endereço de e-mail corporativo');
-        this.companyInput = this.page.getByLabel('Nome da empresa');
-        this.jobTitleInput = this.page.getByLabel('Nome do cargo');
-        this.phoneInput = this.page.getByLabel('Telefone:');
-        this.questionTextarea = this.page.getByLabel('Sua pergunta');
+
+        this.firstNameInput = this.page.locator('input[name="FirstName"]');
+        this.lastNameInput = this.page.locator('input[name="LastName"]');
+        this.businessEmailInput = this.page.locator('input[name="Email"]');
+        this.companyInput = this.page.locator('input[name="Company"]');
+        this.jobTitleInput = this.page.locator('input[name="Title"]');
+        this.phoneInput = this.page.locator('input[name="Phone"]');
+        this.questionTextarea = this.page.locator('textarea[name="Avanade_Website_ContactUs_Request"]');
 
         // Select fields
         this.countrySelect = this.page.getByLabel('País');
@@ -27,6 +29,20 @@ class ContactForm extends BasePage {
 
         // Submit button
         this.submitButton = this.page.getByRole('button', { name: 'Enviar' });
+    }
+
+    async validateFormVisible() {
+        await expect(this.formPopover).toBeVisible();
+
+        await expect(this.firstNameInput).toBeVisible();
+        await expect(this.lastNameInput).toBeVisible();
+        await expect(this.businessEmailInput).toBeVisible();
+        await expect(this.companyInput).toBeVisible();
+        await expect(this.jobTitleInput).toBeVisible();
+        await expect(this.phoneInput).toBeVisible();
+        await expect(this.questionTextarea).toBeVisible();
+
+        await expect(this.submitButton).toBeVisible();
     }
 
     async fillFirstName(firstName) {
@@ -50,11 +66,11 @@ class ContactForm extends BasePage {
     }
 
     async selectCountry(country) {
-        await this.countrySelect.selectOption({ label: country });
+        await this.countrySelect.selectOption(country);
     }
 
     async selectProfile(profile) {
-        await this.profileSelect.selectOption({ label: profile });
+        await this.profileSelect.selectOption(profile);
     }
 
     async fillPhone(phone) {

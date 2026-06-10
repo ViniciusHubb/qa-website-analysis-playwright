@@ -58,4 +58,4 @@ class Footer {
     }
 }
 
-module.exports = { Footer };
+module.exports = Footer;

@@ -1,6 +1,7 @@
 const BasePage = require('./BasePage');
 const Header = require('../components/Header');
 const Footer = require('../components/Footer');
+const { expect } = require('@playwright/test');
 
 class HomePage extends BasePage {
     /**
@@ -12,7 +13,7 @@ class HomePage extends BasePage {
         this.footer = new Footer(page);
 
         // Hero section elements
-        this.heroTitle = page.getByRole('heading', { name: 'O principal especialista Microsoft do mundo' });
+        this.heroTitle = page.getByRole('heading').first();
         this.talkToAvanadeButton = page.getByRole('link', { name: 'Fale com a Avanade' });
 
         // Animated Carousel Section
@@ -42,29 +43,34 @@ class HomePage extends BasePage {
         this.metricItems = this.metricsSection.locator('.metric-blocks__metric');
     }
 
+async validatePageLoaded() {
+    await expect(this.header.logo).toBeVisible();
+    await expect(this.heroTitle).toBeVisible();
+}
+
     async navigate() {
-        await super.navigate('/');
-    }
+    await this.page.goto('https://www.avanade.com/pt-br');
+}
 
     async clickTalkToAvanade() {
-        await this.talkToAvanadeButton.click();
-    }
+    await this.talkToAvanadeButton.click();
+}
 
     async clickNextCarousel() {
-        await this.carouselNextButton.click();
-    }
+    await this.carouselNextButton.click();
+}
 
     async clickPrevCarousel() {
-        await this.carouselPrevButton.click();
-    }
+    await this.carouselPrevButton.click();
+}
 
     async getClientCardsCount() {
-        return this.clientCards.count();
-    }
+    return this.clientCards.count();
+}
 
     async getMetricItemsCount() {
-        return this.metricItems.count();
-    }
+    return this.metricItems.count();
+}
 }
 
 module.exports = HomePage;
