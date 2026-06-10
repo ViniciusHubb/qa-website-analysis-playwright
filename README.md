@@ -1,12 +1,12 @@
 # QA Website Analysis - Playwright
 
-## 📌 Objetivo
+##  Objetivo
 
 Este projeto tem como objetivo realizar uma análise exploratória e automação de testes em um site institucional, focando nos fluxos mais críticos e na aplicação de boas práticas de QA.
 
 ---
 
-## 🧠 Abordagem
+##  Abordagem
 
 Devido ao tempo limitado, foi adotada uma estratégia de testes focada em **valor de negócio e risco**, priorizando:
 
@@ -18,16 +18,16 @@ A abordagem buscou equilíbrio entre qualidade, clareza de código e estabilidad
 
 ---
 
-## 🧪 Escopo de Testes
+##  Escopo de Testes
 
-### ✅ Fluxos automatizados
+###  Fluxos automatizados
 
 - Abertura do formulário de contato via header
 - Validação de carregamento da página inicial
 - Preenchimento completo do formulário (sem envio)
 - Validação de visibilidade e interação dos campos
 
-### 🔍 Testes exploratórios
+###  Testes exploratórios
 
 Os testes exploratórios foram realizados de forma **manual**, com foco em:
 
@@ -38,7 +38,7 @@ Os testes exploratórios foram realizados de forma **manual**, com foco em:
 
 ---
 
-## 🧠 Abordagem de Testes
+##  Abordagem de Testes
 
 Os cenários de teste foram inicialmente estruturados utilizando **Gherkin**, com apoio de IA para geração inicial.
 
@@ -48,7 +48,7 @@ Os cenários de teste foram inicialmente estruturados utilizando **Gherkin**, co
 
 ---
 
-## 🏗️ Arquitetura
+##  Arquitetura
 
 O projeto foi estruturado utilizando **Page Object Model (POM)** para garantir:
 
@@ -56,7 +56,7 @@ O projeto foi estruturado utilizando **Page Object Model (POM)** para garantir:
 - Reutilização de código  
 - Manutenibilidade  
 
-### 📁 Estrutura
+###  Estrutura
 
 ```
 pages/        → páginas do sistema
@@ -68,7 +68,7 @@ utils/        → funções auxiliares
 
 ---
 
-## 🧩 Decisões técnicas
+##  Decisões técnicas
 
 - Uso de **Playwright** para automação E2E  
 - Separação entre **pages** e **components**  
@@ -77,7 +77,7 @@ utils/        → funções auxiliares
 
 ---
 
-## 🎯 Estratégia de Locators
+##  Estratégia de Locators
 
 Durante a implementação foi identificado que o formulário utiliza **Marketo (renderização dinâmica)**.
 
@@ -90,7 +90,7 @@ Por isso:
 
 ---
 
-## 🌍 Tratamento de idioma
+##  Tratamento de idioma
 
 O site realiza redirecionamento automático de idioma com base em região.
 
@@ -102,7 +102,7 @@ Para garantir estabilidade dos testes:
 
 ---
 
-## 🤖 Uso de IA
+##  Uso de IA
 
 IA foi utilizada como apoio para:
 
@@ -116,7 +116,7 @@ Importante:
 
 ---
 
-## 🚀 Como executar
+##  Como executar
 
 ```bash
 npm install
@@ -125,34 +125,34 @@ npx playwright test
 
 ---
 
-## 🚧 Melhorias futuras
+##  Melhorias futuras
 
 Caso o projeto evolua, os próximos passos planejados incluem:
 
-- 📈 Expansão da cobertura de testes:
+-  Expansão da cobertura de testes:
   - Inclusão de novos fluxos críticos do site (ex: navegação completa, busca, links estratégicos)
   
-- 🧪 Aumento da robustez dos testes:
+-  Aumento da robustez dos testes:
   - Utilização de atributos específicos como `data-testid` para tornar os locators mais estáveis e menos dependentes de layout ou texto
 
-- 🔄 Testes mais dinâmicos:
+-  Testes mais dinâmicos:
   - Uso da biblioteca **Faker** para geração de dados dinâmicos (emails, nomes, empresas), garantindo maior diversidade nos testes e evitando dados estáticos
 
-- 🌐 Cobertura adicional:
+-  Cobertura adicional:
   - Testes específicos para troca de idioma
   - Testes de responsividade em diferentes dispositivos
 
-- ⚡ Melhoria de organização:
+-  Melhoria de organização:
   - Refinamento das fixtures conforme aumento da escala do projeto
   - Possível separação por fluxo (ex: contact/, navigation/)
 
-- 🤖 Uso contínuo de IA:
+-  Uso contínuo de IA:
   - Continuidade no uso de IA como apoio na geração de cenários
   - Refinamento manual para garantir qualidade e aderência ao contexto
 
 ---
 
-## ✅ Considerações finais
+##  Considerações finais
 
 Este projeto foi desenvolvido com foco em:
 
