@@ -87,6 +87,21 @@ class ContactForm extends BasePage {
         await this.optIn.check();
     }
 
+    async fillForm(data) {
+        await this.firstName.fill(data.firstName);
+        await this.lastName.fill(data.lastName);
+        await this.email.fill(data.email);
+        await this.company.fill(data.company);
+        await this.jobTitle.fill(data.jobTitle);
+        await this.phone.fill(data.phone);
+        await this.question.fill(data.question);
+
+        await this.country.selectOption(data.country);
+        await this.profile.selectOption(data.profile);
+
+        await this.optIn.check();
+    }
+
     async submit() {
         await this.submitButton.click();
     }

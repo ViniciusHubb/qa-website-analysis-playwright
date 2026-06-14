@@ -1,4 +1,5 @@
 const { test, expect } = require('../fixtures/testFixtures');
+const { faker } = require('@faker-js/faker');
 
 test('Deve abrir e preencher formulário de contato', async ({ homePage, header, contactForm }) => {
 
@@ -9,15 +10,17 @@ test('Deve abrir e preencher formulário de contato', async ({ homePage, header,
     
     await contactForm.validateVisible();
 
-    await contactForm.fillFirstName('Teste');
-    await contactForm.fillLastName('QA');
-    await contactForm.fillEmail('teste@email.com');
-    await contactForm.fillCompany('Empresa Teste');
-    await contactForm.fillJobTitle('QA Engineer');
-    await contactForm.selectCountry('Brazil');
-    await contactForm.selectProfile('Other');
-    await contactForm.fillPhone('81999999999');
-    await contactForm.fillQuestion('Teste automatizado');
+    const formData = {
+        firstName: faker.person.firstName(),
+        lastName: faker.person.lastName(),
+        email: faker.internet.email(),
+        company: faker.company.name(),
+        jobTitle: 'QA Engineer',
+        country: 'Brazil',
+        profile: 'Other',
+        phone: faker.phone.number('###########'),
+        question: 'Teste automatizado'
+    };
 
-    await contactForm.checkOptIn();
+    await contactForm.fillForm(formData);
 });
