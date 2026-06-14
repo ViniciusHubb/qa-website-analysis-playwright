@@ -7,82 +7,84 @@ class ContactForm extends BasePage {
      */
     constructor(page) {
         super(page);
-        this.formPopover = this.page.locator('#contact-us-popover');
-        this.closeButton = this.formPopover.locator('button.close-button');
 
-        // Input fields
+        this.popover = page.locator('#contact-us-popover');
+        this.form = this.popover.locator('form.mktoForm');
 
-        this.firstNameInput = this.page.locator('input[name="FirstName"]');
-        this.lastNameInput = this.page.locator('input[name="LastName"]');
-        this.businessEmailInput = this.page.locator('input[name="Email"]');
-        this.companyInput = this.page.locator('input[name="Company"]');
-        this.jobTitleInput = this.page.locator('input[name="Title"]');
-        this.phoneInput = this.page.locator('input[name="Phone"]');
-        this.questionTextarea = this.page.locator('textarea[name="Avanade_Website_ContactUs_Request"]');
+        this.closeButton = this.popover.locator('button.close-button');
 
-        // Select fields
-        this.countrySelect = this.page.getByLabel('País');
-        this.profileSelect = this.page.getByLabel('Perfil');
+        this.firstName = this.form.locator('input[name="FirstName"]');
+        this.lastName = this.form.locator('input[name="LastName"]');
+        this.email = this.form.locator('input[name="Email"]');
+        this.company = this.form.locator('input[name="Company"]');
+        this.jobTitle = this.form.locator('input[name="Title"]');
+        this.phone = this.form.locator('input[name="Phone"]');
 
-        // Checkbox
-        this.optInCheckbox = this.page.locator('input[name="avanadeOptin"]');
+        this.question = this.form.locator(
+            'textarea[name="Avanade_Website_ContactUs_Request"]'
+        );
 
-        // Submit button
-        this.submitButton = this.page.getByRole('button', { name: 'Enviar' });
+        this.country = this.form.locator('select[name="Country"]');
+        this.profile = this.form.locator('select[name="Avanade_Relationship"]');
+
+        this.optIn = this.form.locator('input[name="avanadeOptin"]');
+
+        this.submitButton = this.form.locator('button[type="submit"]');
     }
 
-    async validateFormVisible() {
-        await expect(this.formPopover).toBeVisible();
+    async validateVisible() {
+        await expect(this.popover).toBeVisible();
+        await expect(this.form).toBeVisible();
 
-        await expect(this.firstNameInput).toBeVisible();
-        await expect(this.lastNameInput).toBeVisible();
-        await expect(this.businessEmailInput).toBeVisible();
-        await expect(this.companyInput).toBeVisible();
-        await expect(this.jobTitleInput).toBeVisible();
-        await expect(this.phoneInput).toBeVisible();
-        await expect(this.questionTextarea).toBeVisible();
+        await expect(this.firstName).toBeVisible();
+        await expect(this.lastName).toBeVisible();
+        await expect(this.email).toBeVisible();
+        await expect(this.company).toBeVisible();
+        await expect(this.jobTitle).toBeVisible();
+        await expect(this.phone).toBeVisible();
+        await expect(this.question).toBeVisible();
 
         await expect(this.submitButton).toBeVisible();
     }
 
-    async fillFirstName(firstName) {
-        await this.firstNameInput.fill(firstName);
+    async fillFirstName(value) {
+        await this.firstName.fill(value);
     }
 
-    async fillLastName(lastName) {
-        await this.lastNameInput.fill(lastName);
+    async fillLastName(value) {
+        await this.lastName.fill(value);
     }
 
-    async fillBusinessEmail(email) {
-        await this.businessEmailInput.fill(email);
+    async fillEmail(value) {
+        await this.email.fill(value);
     }
 
-    async fillCompany(companyName) {
-        await this.companyInput.fill(companyName);
+    async fillCompany(value) {
+        await this.company.fill(value);
     }
 
-    async fillJobTitle(jobTitle) {
-        await this.jobTitleInput.fill(jobTitle);
+    async fillJobTitle(value) {
+        await this.jobTitle.fill(value);
     }
 
-    async selectCountry(country) {
-        await this.countrySelect.selectOption(country);
+    async fillPhone(value) {
+        await this.phone.fill(value);
     }
 
-    async selectProfile(profile) {
-        await this.profileSelect.selectOption(profile);
+    async fillQuestion(value) {
+        await this.question.fill(value);
     }
 
-    async fillPhone(phone) {
-        await this.phoneInput.fill(phone);
+    async selectCountry(value) {
+        await this.country.selectOption(value);
     }
 
-    async fillQuestion(question) {
-        await this.questionTextarea.fill(question);
+    async selectProfile(value) {
+        await this.profile.selectOption(value);
     }
 
     async checkOptIn() {
-        await this.optInCheckbox.check();
+        await this.optIn.check();
     }
 
     async submit() {

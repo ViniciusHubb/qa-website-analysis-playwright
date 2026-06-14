@@ -7,11 +7,11 @@ test('Deve abrir e preencher formulário de contato', async ({ homePage, header,
 
     await header.clickContactUs();
     
-    await contactForm.validateFormVisible();
+    await contactForm.validateVisible();
 
     await contactForm.fillFirstName('Teste');
     await contactForm.fillLastName('QA');
-    await contactForm.fillBusinessEmail('teste@email.com');
+    await contactForm.fillEmail('teste@email.com');
     await contactForm.fillCompany('Empresa Teste');
     await contactForm.fillJobTitle('QA Engineer');
     await contactForm.selectCountry('Brazil');
