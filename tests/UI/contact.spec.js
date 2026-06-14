@@ -1,7 +1,7 @@
-const { test, expect } = require('../fixtures/testFixtures');
+const { test, expect } = require('../../fixtures/testFixtures');
 const { faker } = require('@faker-js/faker');
 
-test('Deve abrir e preencher formulário de contato', async ({ homePage, header, contactForm }) => {
+test('Should open and fill the contact form', async ({ homePage, header, contactForm }) => {
 
     await homePage.navigate();
     await homePage.validatePageLoaded();
