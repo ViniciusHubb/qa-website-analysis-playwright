@@ -9,68 +9,62 @@ class HomePage extends BasePage {
      */
     constructor(page) {
         super(page);
+
         this.header = new Header(page);
         this.footer = new Footer(page);
 
-        // Hero section elements
-        this.heroTitle = page.getByRole('heading').first();
-        this.talkToAvanadeButton = page.getByRole('link', { name: 'Fale com a Avanade' });
+        this.heroSection = page.locator('.homepage-hero-video');
+        this.heroTitle = this.heroSection.locator('h1');
+        this.talkToAvanadeButton = this.heroSection.locator('a[href*="/contact"]');
 
-        // Animated Carousel Section
         this.animatedCarousel = page.locator('.animated-carousel');
         this.carouselBigCardTitle = this.animatedCarousel.locator('.animated-carousel__big-card-title');
-        this.carouselNextButton = this.animatedCarousel.getByTestId('next');
-        this.carouselPrevButton = this.animatedCarousel.getByTestId('previous');
+        this.carouselNextButton = this.animatedCarousel.locator('[data-testid="next"]');
+        this.carouselPrevButton = this.animatedCarousel.locator('[data-testid="previous"]');
 
-        // Clients Section
-        this.clientsSectionTitle = page.getByRole('heading', { name: 'Como ajudamos nossos clientes através da tecnologia Microsoft' });
         this.clientCards = page.locator('.cards--without-title__single-card-container');
 
-        // Services Section
-        this.servicesSectionTitle = page.getByRole('heading', { name: 'Nossos serviços' });
-        this.servicesLink = page.getByRole('link', { name: 'Conheça os nossos serviços' });
+        this.servicesSection = page.locator('.text-image-left');
+        this.servicesLink = this.servicesSection.locator('a[href*="/services"]');
 
-        // Market Experience Section
-        this.marketExperienceSectionTitle = page.getByRole('heading', { name: 'Nossa experiência de mercado' });
-        this.marketExperienceLink = page.getByRole('link', { name: 'Explore nossa experiência por setor' });
+        this.marketExperienceSection = page.locator('.text-image-right');
+        this.marketExperienceLink = this.marketExperienceSection.locator('a[href*="/industry"]');
 
-        // Vision Section
-        this.visionSectionTitle = page.getByRole('heading', { name: 'A nossa visão' });
-        this.visionLink = page.getByRole('link', { name: 'Saiba mais sobre nós' });
+        this.visionSection = page.locator('.title-banner');
+        this.visionLink = this.visionSection.locator('a[href*="/about"]');
 
-        // Metrics Section
         this.metricsSection = page.locator('.metric-blocks');
         this.metricItems = this.metricsSection.locator('.metric-blocks__metric');
     }
 
-async validatePageLoaded() {
-    await expect(this.header.logo).toBeVisible();
-    await expect(this.heroTitle).toBeVisible();
-}
-
     async navigate() {
-    await this.page.goto('https://www.avanade.com/pt-br');
-}
+        await super.navigate('/');
+    }
+
+    async validatePageLoaded() {
+        await expect(this.header.logo).toBeVisible();
+        await expect(this.heroTitle).toBeVisible();
+    }
 
     async clickTalkToAvanade() {
-    await this.talkToAvanadeButton.click();
-}
+        await this.talkToAvanadeButton.click();
+    }
 
     async clickNextCarousel() {
-    await this.carouselNextButton.click();
-}
+        await this.carouselNextButton.click();
+    }
 
     async clickPrevCarousel() {
-    await this.carouselPrevButton.click();
-}
+        await this.carouselPrevButton.click();
+    }
 
     async getClientCardsCount() {
-    return this.clientCards.count();
-}
+        return this.clientCards.count();
+    }
 
     async getMetricItemsCount() {
-    return this.metricItems.count();
-}
+        return this.metricItems.count();
+    }
 }
 
 module.exports = HomePage;
