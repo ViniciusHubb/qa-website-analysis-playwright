@@ -6,19 +6,50 @@ class Header extends BasePage {
      */
     constructor(page) {
         super(page);
-        this.headerContainer = this.page.locator('#header');
-        this.logo = this.page.getByRole('link', { name: 'avanade-logo-color' });
-        this.contactUsButton = this.page.getByRole('link', { name: 'Entre em contato conosco' });
-        this.languageSelectorButton = this.page.getByRole('button', { name: 'Language & region' });
-        this.searchButton = this.page.locator('div.search-box button[title="Search"]');
+
+        this.header = page.locator('#header');
+
+        this.logo = this.header.locator('a[aria-label="avanade-logo-color"]');
+        this.contactUsButton = this.header.locator('a.header-contact-us-button');
+        this.languageSelectorButton = this.header.locator('button.site-selector__button');
+        this.searchButton = this.header.locator('div.search-box button[title="Search"]');
+
+        this.industries = this.header.locator('a[href$="/industry"]');
+        this.services = this.header.locator('a[href$="/services"]');
+        this.insights = this.header.locator('a[href$="/insights"]');
+        this.careers = this.header.locator('a[href$="/career"]');
+        this.about = this.header.locator('a[href$="/about"]');
     }
 
-    /**
-     * Clicks on a main navigation menu item by its name.
-     * @param {string} menuName - The name of the menu item to click (e.g., 'Indústrias', 'Serviços').
-     */
-    async clickMenuItem(menuName) {
-        await this.page.getByRole('link', { name: menuName, exact: true }).click();
+    async clickLanguageSelector() {
+        await this.languageSelectorButton.click();
+    }
+
+    async selectLanguageByUrl(path) {
+        await this.clickLanguageSelector();
+
+        const languageOption = this.header.locator(`.site-selector a[href*="${path}"]`);
+        await languageOption.click();
+    }
+
+    async clickIndustries() {
+        await this.industries.click();
+    }
+
+    async clickServices() {
+        await this.services.click();
+    }
+
+    async clickInsights() {
+        await this.insights.click();
+    }
+
+    async clickCareers() {
+        await this.careers.click();
+    }
+
+    async clickAbout() {
+        await this.about.click();
     }
 
     async clickSearch() {
@@ -28,6 +59,7 @@ class Header extends BasePage {
     async clickContactUs() {
         await this.contactUsButton.click();
     }
+
 }
 
 module.exports = Header;
